@@ -174,31 +174,39 @@ namespace TugasCodingCamp52
         //Add Participant
         static void AddParticipant(List<CodingCamp> codingCamps)
         {
-            int pilih;
             string nik, nama;
 
             Console.Clear();
             CodingCamp cc = new CodingCamp();
 
             cc.ShowDataCC(codingCamps);
+        X:
+            try
+            {
+                Console.Write("Pilih Nomor Coding Camp  : ");
+                int pilih = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(codingCamps[pilih - 1].Nama);
+                Console.WriteLine("----------------------------");
 
-            Console.Write("Pilih Nomor Coding Camp  : ");
-            pilih = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("----------------------------");
-            Console.Write("NIK  : ");
-            nik = Console.ReadLine();
-            Console.Write("Nama : ");
-            nama = Console.ReadLine();
+                Console.Write("NIK  : ");
+                nik = Console.ReadLine();
 
-            Participant participant = new Participant();
-            participant.Nik = nik;
-            participant.Nama = nama;
+                Console.Write("Nama : ");
+                nama = Console.ReadLine();
 
-            participant.CodingCamps = codingCamps[pilih - 1];
-
-            codingCamps[pilih - 1].Participants.Add(participant);
-
-            Console.WriteLine("Insert Participant Success!!!");
+                Participant participant = new Participant();
+                participant.Nik = nik;
+                participant.Nama = nama;
+                participant.CodingCamps = codingCamps[pilih - 1];
+                codingCamps[pilih - 1].Participants.Add(participant);
+                Console.WriteLine("Insert Participant Success!!!");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Nomor yang di input tidak sesuai");
+                goto X;
+            }
+            
             Console.ReadKey();
             Console.Clear();
         }
